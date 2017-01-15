@@ -1,0 +1,39 @@
+name: trove
+summary: OpenStack database service
+maintainer: TransCirrus <support@transcirrus.com>
+description: |
+ Trove is a database service that provides on demand databases.
+tags:
+  - openstack
+  - database
+  - misc
+series:
+  - xenial
+  - yakkety
+extra-bindings:
+  public:
+  admin:
+  internal:
+provides:
+  nrpe-external-master:
+    interface: nrpe-external-master
+    scope: container
+  identity-service:
+    interface: keystone
+  identity-notifications:
+    interface: keystone-notifications
+  identity-admin:
+    interface: keystone-admin
+  identity-credentials:
+    interface: keystone-credentials
+requires:
+  shared-db:
+    interface: mysql-shared
+  pgsql-db:
+    interface: pgsql
+  ha:
+    interface: hacluster
+    scope: container
+peers:
+  cluster:
+    interface: keystone-ha
