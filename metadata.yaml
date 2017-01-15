@@ -1,39 +1,32 @@
-name: trove
-summary: OpenStack database service
-maintainer: TransCirrus <support@transcirrus.com>
-description: |
- Trove is a database service that provides on demand databases.
-tags:
-  - openstack
-  - database
-  - misc
-series:
-  - xenial
-  - yakkety
-extra-bindings:
-  public:
-  admin:
-  internal:
-provides:
-  nrpe-external-master:
-    interface: nrpe-external-master
-    scope: container
-  identity-service:
-    interface: keystone
-  identity-notifications:
-    interface: keystone-notifications
-  identity-admin:
-    interface: keystone-admin
-  identity-credentials:
-    interface: keystone-credentials
-requires:
-  shared-db:
-    interface: mysql-shared
-  pgsql-db:
-    interface: pgsql
-  ha:
-    interface: hacluster
-    scope: container
-peers:
-  cluster:
-    interface: keystone-ha
+"name": "trove"
+"summary": "Trove provides DBaaS services for OpenStack"
+"maintainer": "TransCirrus <support@transcirrus.com>"
+"description": |
+  Trove is Database as a Service for OpenStack. It's designed to run entirely on OpenStack,
+  with the goal of allowing users to quickly and easily utilize the features of a relational
+  or non-relational database without the burden of handling complex administrative tasks.
+"tags":
+- "openstack"
+- "openstack"
+- "database"
+"requires":
+  "shared-db":
+    "interface": "mysql-shared"
+  "amqp":
+    "interface": "rabbitmq"
+  "identity-service":
+    "interface": "keystone"
+  "ha":
+    "interface": "hacluster"
+    "scope": "container"
+"peers":
+  "cluster":
+    "interface": "openstack-ha"
+"extra-bindings":
+  "public": !!null ""
+  "admin": !!null ""
+  "internal": !!null ""
+"series":
+- "xenial"
+- "yakkety"
+"subordinate": !!bool "false"
